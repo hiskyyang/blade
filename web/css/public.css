@@ -1,0 +1,75 @@
+body{
+    font-size: 14px;
+}
+.header {
+    background: #E0ECFF;
+    border-width: 1px 1px 0 1px;
+    border-style: solid;
+    border-color: #95B8E7;
+}
+
+.header-bannaer {
+    /*background-image: url('../images/header.jpg');*/
+    width: 100%;
+    height: 20px;
+}
+
+.header-menu {
+    text-align: left;
+    line-height:30px;
+    padding-left: 10px;
+    height: 30px;
+}
+
+.header-user {
+    text-align: right;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+}
+
+.panel {
+    background: #E0ECFF;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #95B8E7;
+}
+
+.panel-title {
+    background: #F4F4F0;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #95B8E7;
+    font-weight: bold;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.panel-searchForm {
+    background: #F4F4F4;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #95B8E7;
+    padding-left: 10px;
+}
+
+.panel-dataGrid {
+    background: #F4F4F4;
+}
+
+.panel-dataGrid-headerColumn {
+    background: #F4F4F4;
+    border-color: #ccc;
+    border-width: 0 1px 1px 0;
+    border-style: dotted;
+    padding-left: 10px;
+}
+
+.panel-dataGrid-dataColumn{
+    background: #ffffff;
+    border-color: #ccc;
+    border-width: 0 1px 1px 0;
+    border-style: dotted;
+    padding-left: 10px;
+}

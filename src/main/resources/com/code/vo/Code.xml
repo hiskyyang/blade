@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Code">
+    <!-- 定义一条查询语句，在bean的implementation中会引用此语句的id http://wangh8080.blog.163.com/blog/static/1978482972012102804918201/ -->
+    <insert id="add" parameterType="Code">
+        INSERT INTO Code (type,code,value,sequence)
+        VALUES(#{type},#{code},#{value},#{sequence})
+
+        <selectKey resultType="java.lang.Integer" keyProperty="codeId"
+                   order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <delete id="delete" parameterType="int">
+		DELETE FROM Code WHERE codeId=#{codeId}
+	</delete>
+
+    <update id="update" parameterType="Code">
+		UPDATE Code SET
+            type=#{type},
+            code=#{code},
+            value=#{value},
+            sequence=#{sequence}
+		WHERE codeId=#{codeId}
+	</update>
+
+    <select id="get" parameterType="int" resultType="Code">
+		SELECT * from Code where codeId=#{codeId}
+	</select>
+
+    <select id="list" parameterType="Code" resultType="Code">
+        SELECT * from Code where 1=1
+        <if test="codeId != null">
+            and codeId=#{codeId}
+        </if>
+        <if test="type != null and type != ''">
+            and type=#{type}
+        </if>
+        <if test="code != null and code != ''">
+            and code like CONCAT(#{code}, '%')
+        </if>
+        <if test="value != null and value != ''">
+            and value=#{value}
+        </if>
+        order by type, sequence
+    </select>
+
+    <select id="types" resultType="String">
+        SELECT distinct type from Code
+    </select>
+
+</mapper>

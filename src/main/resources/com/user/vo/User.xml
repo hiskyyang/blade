@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="User">
+    <!-- 定义一条查询语句，在bean的implementation中会引用此语句的id http://wangh8080.blog.163.com/blog/static/1978482972012102804918201/ -->
+    <insert id="add" parameterType="User">
+        INSERT INTO
+        User (name,password,team,level,role,firstLog,createdTime,modifiedTime)
+        VALUES(#{name},#{password},#{team},#{level},#{role},#{firstLog},now(),now())
+
+        <selectKey resultType="java.lang.Integer" keyProperty="userId"
+                   order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM User
+        WHERE userId = #{userId}
+    </delete>
+
+    <update id="update" parameterType="User">
+        UPDATE User
+        set
+            name         = #{name},
+            password     = #{password},
+            team         = #{team},
+            level        = #{level},
+            role         = #{role},
+            firstLog     = #{firstLog},
+            modifiedTime = now()
+        WHERE userId = #{userId}
+    </update>
+
+    <select id="get" parameterType="int" resultType="User">
+        SELECT *
+        from User
+        where userId = #{userId}
+    </select>
+
+    <select id="list" parameterType="User" resultType="User">
+        SELECT * from User where 1=1
+        <if test="userId != null">
+            and userId=#{userId}
+        </if>
+        <if test="name != null and name != ''">
+            and name=#{name}
+        </if>
+        <if test="password != null and password != ''">
+            and password=#{password}
+        </if>
+        <if test="team != null and team != ''">
+            and team=#{team}
+        </if>
+        <if test="level != null and level != ''">
+            and level=#{level}
+        </if>
+        <if test="role != null and role != ''">
+            and role=#{role}
+        </if>
+    </select>
+
+</mapper>
